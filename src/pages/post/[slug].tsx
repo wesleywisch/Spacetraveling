@@ -18,9 +18,11 @@ import styles from './post.module.scss';
 import { getPrismicClient } from '../../services/prismic';
 
 interface Post {
+  uid: string;
   first_publication_date: string | null;
   data: {
     title: string;
+    subtitle: string;
     banner: {
       url: string;
     };
@@ -39,6 +41,12 @@ interface PostProps {
 }
 
 export default function Post({ post }: PostProps): JSX.Element {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <h1>Carregando...</h1>;
+  }
+
   const totalWords = post.data.content.reduce((total, contentItem) => {
     total += contentItem.heading.split(' ').length;
 
@@ -49,11 +57,7 @@ export default function Post({ post }: PostProps): JSX.Element {
   }, 0);
 
   const readTime = Math.ceil(totalWords / 200);
-  const router = useRouter();
 
-  if (router.isFallback) {
-    return <h1>Carregando...</h1>;
-  }
   const formatedDate = format(
     new Date(post.first_publication_date),
     'dd MMM yyyy',
@@ -133,22 +137,15 @@ export const getStaticProps: GetStaticProps = async context => {
   const { slug } = context.params;
   const response = await prismic.getByUID('post-blog', String(slug), {});
 
-  const post = {
+  const post: Post = {
     uid: response.uid,
     first_publication_date: response.first_publication_date,
     data: {
-      title: response.data.title,
-      subtitle: response.data.title,
       author: response.data.author,
-      banner: {
-        url: response.data.banner.url,
-      },
-      content: response.data.content.map(content => {
-        return {
-          heading: content.heading,
-          body: [...content.body],
-        };
-      }),
+      banner: response.data.banner,
+      title: response.data.title,
+      subtitle: response.data.subtitle,
+      content: response.data.content,
     },
   };
 
