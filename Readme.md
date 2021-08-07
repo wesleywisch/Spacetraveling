@@ -9,7 +9,7 @@ Nesse desafio você deve criar do zero uma aplicação de um blog com Prismic CM
 
 <h2 id="layout"> 🎨  Layouts</h2>
 
-![spacetraveling](https://user-images.githubusercontent.com/79159487/127213457-bf1653d0-fd6e-48d3-acf7-29100f082c10.gif)
+![spacetraveling](https://user-images.githubusercontent.com/79159487/128604517-d50861dc-ef02-4f69-b504-9a3e4876058d.gif)
 
 
 <h2 id="aplicacao"> 🎲  Rodando essa aplicação:</h2>
