@@ -18,7 +18,7 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 
 ```
 # Clone este repositório
-$ git clone https://github.com/wesleywisch/Ignite-reactjs-criando-um-projeto-do-zero.git
+$ git clone https://github.com/wesleywisch/Spacetraveling.git
 
 # Instale as dependências
 $ yarn ou npm install
